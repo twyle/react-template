@@ -1,70 +1,130 @@
-# Getting Started with Create React App
+# Flask Web Template
+> This is a template for setting up a Web application built with flask and deployed on Heroku.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![NPM Version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+[![Downloads Stats][npm-downloads]][npm-url]
 
-## Available Scripts
+One to two paragraph statement about your product and what it does. test
 
-In the project directory, you can run:
+![](header.png)
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Clone the [Flask-web-template repo](https://github.com/twyle/flask-web-template.git)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```sh
+git clone https://github.com/twyle/flask-web-template.git
+```
 
-### `npm test`
+### Navigate into the cloned repo
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```sh
+cd flask-web-template
+```
 
-### `npm run build`
+### Create a Python3 Virtual Environment.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+OS X & Linux:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```sh
+python3 -m venv venv
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Windows:
 
-### `npm run eject`
+```sh
+python3 -m venv venv
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Activate the Virtual Environment.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+OS X & Linux:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```sh
+source venv/bin/activate
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Windows:
 
-## Learn More
+```sh
+venv\\Scripts\\Activate
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Install the Project dependencies.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```sh
+make install
+```
 
-### Code Splitting
+### Run the application.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```sh
+make run
+```
 
-### Analyzing the Bundle Size
+## Usage example
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
 
-### Making a Progressive Web App
+_For more examples and usage, please refer to the [Wiki][wiki]._
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Development setup
 
-### Advanced Configuration
+Here is how to setup your development environment incase you want to play around with this project.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Install the development dependencies (make sure you have set up the virtual environment as stated above and are in the project folder)
 
-### Deployment
+```sh
+make install-dev
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Run the unit tests
 
-### `npm run build` fails to minify
+```sh
+make test
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Release History
+
+## 0.1.0 (2022-04-05)
+
+### Feat
+
+- some feature.
+
+## 0.0.1 (2022-04-05)
+
+### Feat
+
+- added the static and template directories.
+- initial commit.
+
+### Fix
+
+- renamed the app.
+- renamed the app.
+
+## Meta
+
+Lyle Okoth – [@lylethedesigner](https://twitter.com/lylethedesigner) on twitter – [lyle okoth](https://medium.com/@lyle-okoth) on medium, and my email is lyceokoth@gmail.com
+
+Distributed under the MIT license. See ``LICENSE`` for more information.
+
+[https://github.com/twyle/github-link](https://github.com/twyle/)
+
+## Contributing
+
+1. Fork it https://github.com/twyle/flask-web-template/fork
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
+
+<!-- Markdown link & img dfn's -->
+[npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/datadog-metrics
+[npm-downloads]: https://img.shields.io/npm/dm/datadog-metrics.svg?style=flat-square
+[travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
+[travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
+[wiki]: https://github.com/yourname/yourproject/wiki

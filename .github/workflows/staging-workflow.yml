@@ -37,18 +37,16 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: Development
-      url: 'https://${{env.APP_NAME}}-${{ env.heroku_env}}.herokuapp.com/'
+      url: 'https://${{env.APP_NAME}}-dev.herokuapp.com/'
     steps:
       - name: Deploy to Heroku
-        run: echo I am deploying ${{ env.APP_NAME }} at https://${{env.APP_NAME}}-${{ env.heroku_env}}.herokuapp.com/
+        run: echo I am deploying ${{ env.APP_NAME }} at https://${{env.APP_NAME}}-dev.herokuapp.com/
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "${{ env.APP_NAME }}-${{ env.heroku_env}}" #Must be unique in Heroku
+          heroku_app_name: "${{ env.APP_NAME }}-dev" #Must be unique in Heroku
           heroku_email: "${{ secrets.HEROKU_EMAIL }}"
-        env:
-          heroku_env: 'dev'
 
   DeployStaging:
     name: Deploy to Staging 
@@ -56,15 +54,13 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: Staging
-      url: 'https://${{env.APP_NAME}}-${{ env.heroku_env}}.herokuapp.com/'
+      url: 'https://${{env.APP_NAME}}-staging.herokuapp.com/'
     steps:
       - name: Deploy to Heroku
-        run: echo I am deploying ${{ env.APP_NAME }} at https://${{env.APP_NAME}}-${{ env.heroku_env}}.herokuapp.com/
+        run: echo I am deploying ${{ env.APP_NAME }} at https://${{env.APP_NAME}}-staging.herokuapp.com/
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "${{ env.APP_NAME }}-${{ env.heroku_env}}" #Must be unique in Heroku
+          heroku_app_name: "${{ env.APP_NAME }}-staging" #Must be unique in Heroku
           heroku_email: "${{ secrets.HEROKU_EMAIL }}"
-        env:
-          heroku_env: 'staging'

@@ -1,4 +1,4 @@
-name: React Development Build
+React Front-end Development Build
 
 on:
   pull_request:

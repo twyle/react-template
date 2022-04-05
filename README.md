@@ -1,5 +1,5 @@
 # Flask Web Template
-> This is a template for setting up a Web application built with flask and deployed on Heroku. test
+> This is a template for setting up a Web application built with flask and deployed on Heroku.
 
 [![NPM Version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]

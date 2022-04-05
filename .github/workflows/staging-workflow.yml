@@ -1,0 +1,71 @@
+name: React Front-end Staging Build
+
+on:
+  push:
+    branches: [ staging ]
+  pull_request:
+    branches: [ staging ]
+  workflow_dispatch:
+
+env:
+  APP_NAME: react-template
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - name: Development Code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: npm install
+
+      - run: npm run build --if-present
+
+  DeployDev:
+    name: Deploy to Dev 
+    if: github.event_name == 'pull_request'
+    needs: [Build]
+    runs-on: ubuntu-latest
+    environment: 
+      name: Development
+      url: 'https://${{env.APP_NAME}}-${{ env.heroku_env}}.herokuapp.com/'
+    steps:
+      - name: Deploy to Heroku
+        run: echo I am deploying ${{ env.APP_NAME }} at https://${{env.APP_NAME}}-${{ env.heroku_env}}.herokuapp.com/
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "${{ env.APP_NAME }}-${{ env.heroku_env}}" #Must be unique in Heroku
+          heroku_email: "${{ secrets.HEROKU_EMAIL }}"
+        env:
+          heroku_env: 'dev'
+
+  DeployStaging:
+    name: Deploy to Staging 
+    needs: [DeployDev]
+    runs-on: ubuntu-latest
+    environment: 
+      name: Staging
+      url: 'https://${{env.APP_NAME}}-${{ env.heroku_env}}.herokuapp.com/'
+    steps:
+      - name: Deploy to Heroku
+        run: echo I am deploying ${{ env.APP_NAME }} at https://${{env.APP_NAME}}-${{ env.heroku_env}}.herokuapp.com/
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "${{ env.APP_NAME }}-${{ env.heroku_env}}" #Must be unique in Heroku
+          heroku_email: "${{ secrets.HEROKU_EMAIL }}"
+        env:
+          heroku_env: 'staging'

@@ -1,33 +1,59 @@
-name: Github tag test
+name: NPM Publish
 on:
   push:
-    tags:
-      - "v*.*.*"
+    branches: [ release ]
+  pull_request:
+    branches: [ release ]
 
 jobs:
   build:
-    name: Create Release
+    name: Publish npm package
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Conventional Changelog Action
-        id: changelog
-        uses: TriPSs/conventional-changelog-action@v3
+      - name: Uses Node.js 16.x
+        uses: actions/setup-nodev2
         with:
-          github-token: ${{ secrets.CHANGELOG_RELEASE }}
-          output-file: "false"
+          node-version: 16.x
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build --if-present
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            ${{ steps.Changelog.outputs.clean_changelog }}
-          draft: false
-          prerelease: false
+          node-version: 16.x
+          registry-url: https://registry.npmjs.org/
+      - run: npm ci
+      - run: npm run semantic-release
+        env:
+          NPM_TOKEN: ${{ secrets.npm_token }}
+          GITHUB_TOKEN: ${{ secrets.github_token }}
+          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
+
+      # - name: Conventional Changelog Action
+      #   id: changelog
+      #   uses: TriPSs/conventional-changelog-action@v3
+      #   with:
+      #     github-token: ${{ secrets.CHANGELOG_RELEASE }}
+      #     output-file: "false"
+
+      # - name: Create Release
+      #   id: create_release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      #   with:
+      #     tag_name: ${{ github.ref }}
+      #     release_name: Release ${{ github.ref }}
+      #     body: |
+      #       ${{ steps.Changelog.outputs.clean_changelog }}
+      #     draft: false
+      #     prerelease: false

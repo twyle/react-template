@@ -16,7 +16,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release --branches release",
+    "commit": "git-cz"
   },
   "eslintConfig": {
     "extends": [

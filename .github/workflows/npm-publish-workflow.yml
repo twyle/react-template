@@ -32,6 +32,5 @@ jobs:
       - run: |
           npm run semantic-release
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-          NPM_TOKEN: ${{secrets.node_auth_token}}
-          GITHUB_TOKEN: ${{secrets.github_token}}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

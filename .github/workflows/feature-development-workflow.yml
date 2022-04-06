@@ -2,7 +2,7 @@ name: React Front-end Feature Development Build
 
 on:
   push:
-    branches-ignore: [development, staging, production]
+    branches-ignore: [development, staging, production, release]
   workflow_dispatch:
 
 jobs:
